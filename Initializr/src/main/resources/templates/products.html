@@ -12,6 +12,8 @@
         <th>NAME</th>
         <th>PRICE</th>
     </tr>
+
+
     <tr th:each="pro : ${someName}">
         <td th:text="${pro.id}"/>
         <td th:text="${pro.name}"/>
@@ -23,13 +25,16 @@
 </table>
 <h1 th:text="${someName.size()}" />
 
-<form th:action="@{/create}" th:object="${product}" method="post">
-    ID: <input type="text" th:field="*{id}" />
-    <br>
-    NAME: <input type="text" th:field="*{name}" />
-    <br>
-    NAME: <input type="text" th:field="*{price}" />
-    <br>
-</form>
+
+<!--<form th:action="@{/create}" th:object="${product}" method="post">-->
+<!--    ID: <input type="text" th:field="*{id}" />-->
+<!--    <br>-->
+<!--    NAME: <input type="text" th:field="*{name}" />-->
+<!--    <br>-->
+<!--    NAME: <input type="text" th:field="*{price}" />-->
+<!--    <br>-->
+<!--</form>-->
+
+
 </body>
 </html>
