@@ -19,21 +19,22 @@
         <td th:text="${pro.name}"/>
         <td th:text="${pro.price}"/>
         <td>
-            <a th:href="@{http://localhost:9000/app/products/{id}(id=${pro.getId()})}">Link</a>
+            <a th:href="@{{id}(id=${pro.getId()})}">Link</a>
         </td>
     </tr>
 </table>
-<h1 th:text="${someName.size()}" />
+<h3 th:text="${someName.size()}" />
 
-
-<!--<form th:action="@{/create}" th:object="${product}" method="post">-->
-<!--    ID: <input type="text" th:field="*{id}" />-->
-<!--    <br>-->
-<!--    NAME: <input type="text" th:field="*{name}" />-->
-<!--    <br>-->
-<!--    NAME: <input type="text" th:field="*{price}" />-->
-<!--    <br>-->
-<!--</form>-->
+<h1>ADD New Product</h1>
+<form th:action="@{'/create'}" method="get">
+    id: <input name="id" type="number"/>
+    <br>
+    name: <input name="name" type="text" />
+    <br>
+    price: <input name="price" type="number"/>
+    <br>
+    <button type="submit">Submit</button>
+</form>
 
 
 </body>
