@@ -1,52 +1,31 @@
 package com.voronkov.Initializr.api;
 
-import com.voronkov.Initializr.model.Product;
-import com.voronkov.Initializr.model.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import com.voronkov.Initializr.Dao.ProductDaoCl;
+import com.voronkov.Initializr.service.ProductService;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Objects;
 
 
-@Controller
+@RestController
 public class ProductController {
-    @Autowired
-    ProductRepository productRepository;
+    private ProductService productService;
 
-    @GetMapping("/{id}")
-    @ResponseBody
-    public String getProduct(@PathVariable int id){
-        Product product = productRepository.getProductList().stream()
-                .filter(it -> Objects.equals(id,it.getId()))
-                .findFirst().orElse(null);
-
-        assert product != null;
-        return product.toString();
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
-    @GetMapping("/all")
-    public String getProducts(Model model){
-        model.addAttribute("someName",productRepository.getProductList());
-
-        // тут у меня проблема, что имя "someName" не подтягивается автоматом в файле html
-        // от этого все в теге tr присал в ручную. НО при этом работает.
-
-        return "products";
+    @GetMapping("/products")
+    public List<ProductDaoCl> getAllProducts() {
+        return productService.getAllProducts();
     }
 
-    @GetMapping("/create")
-    public String create(@RequestParam Integer id,
-                         @RequestParam String name,
-                         @RequestParam Integer price){
-
-        Product product = new Product(name,price,id);
-        productRepository.setNewProduct(product);
-        return "redirect:/all";
+    @GetMapping("/products/delete/{id}")
+    public void deleteById(@PathVariable Long id) {
+        productService.deleteById(id);
     }
 
-
-
+    @GetMapping("/products/change")
+    public void changeScore(@RequestParam Long studentId, @RequestParam Integer delta) {
+        productService.changeScore(studentId, delta);
+    }
 }
