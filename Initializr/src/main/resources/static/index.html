@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="index.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<div class="container" ng-controller="indexController">
+    <h3>Список товаров</h3>
+    <table class="table table-hover" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>ID</td>
+            <td>Название</td>
+            <td>Цена</td>
+            <td>Action</td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="p in ProductList">
+            <td>{{p.id}}</td>
+            <td>{{p.name}}</td>
+            <td>
+                <button class="btn btn-primary" ng-click="changeScore(p.id,-5)">-</button>
+                {{p.price}}
+                <button class="btn btn-primary" ng-click="changeScore(p.id,5)">+</button>
+            </td>
+            <td>
+                <button class="btn btn-danger" ng-click="deleteProduct(p.id)">Удалить</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
