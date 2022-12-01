@@ -42,8 +42,7 @@ public class ProductDaoRep implements ProductDao {
     public List<ProductDaoCl> findAllProducts() {
         try (Session session = sessionFactoryUtils.getSession();) {
             session.beginTransaction();
-            List<ProductDaoCl> products = session.createQuery("select p from ProductDaoCl p " +
-                    "where p.id<10 ").getResultList();
+            List<ProductDaoCl> products = session.createQuery("select p from ProductDaoCl p").getResultList();
             session.getTransaction().commit();
             return products;
         }
@@ -59,29 +58,13 @@ public class ProductDaoRep implements ProductDao {
             session.getTransaction().commit();
         }
     }
+
+    @Override
+    public void save(ProductDaoCl product) {
+        try (Session session = sessionFactoryUtils.getSession();) {
+            session.beginTransaction();
+            session.save(product);
+            session.getTransaction().commit();
+        }
+    }
 }
-
-//    @Override
-//    public void updateByName(Long id, String newName) {
-//        try (Session session = sessionFactoryUtils.getSession();) {
-//            session.beginTransaction();
-//
-//            session.createQuery("update ProductDaoCl p set p.name=:name where p.id=:id")
-//                    .setParameter("name",newName)
-//                    .setParameter("id",id)
-//                    .executeUpdate();
-//
-//        }
-//    }
-
-//    @Override
-//    public ProductDaoCl findByName(String name) {
-//        try (Session session = sessionFactoryUtils.getSession();) {
-//            session.beginTransaction();
-//            ProductDaoCl product = session.createQuery("select p from ProductDaoCl p where p.name= :name", ProductDaoCl.class)
-//                    .setParameter("name", name)
-//                    .getSingleResult();
-//            session.getTransaction().commit();
-//            return product;
-//        }
-//    }
