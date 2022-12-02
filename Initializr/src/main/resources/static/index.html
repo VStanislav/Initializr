@@ -11,8 +11,18 @@
 </head>
 <body>
 <div class="container" ng-controller="indexController">
+    <h3>Фильтр цены</h3>
+    <form novalidate ng-submit="findPrice()">
+        <input class="form-control" type="text" placeholder="min" ng-model="betweenPrice.minn">
+        <p></p>
+        <input class="form-control" type="number" placeholder="max" ng-model="betweenPrice.maxx">
+        <p></p>
+        <button type="submit" class="btn-primary">Find</button>
+        <button type="reset" class="btn-primary" ng-click="loadProducts()">Clear</button>
+    </form>
+
     <h3>Список товаров</h3>
-    <table class="table table-hover" cellpadding="0" cellspacing="0">
+    <table class="table table-hover">
         <tr>
             <td>ID</td>
             <td>Название</td>
@@ -34,6 +44,14 @@
         </tr>
         </tbody>
     </table>
+    <h3>Добавление продукта</h3>
+    <form novalidate ng-submit="createProduct()">
+        <input class="form-control" type="text" placeholder="Название" ng-model="newProduct.name">
+        <p></p>
+        <input class="form-control" type="number" placeholder="Цена" ng-model="newProduct.price">
+        <p></p>
+        <button type="submit" class="btn-primary">Сохранить продукт</button>
+    </form>
 </div>
 </body>
 </html>
