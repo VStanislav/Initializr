@@ -1,7 +1,6 @@
-package com.voronkov.Initializr.repo;
+package com.voronkov.Initializr.noneed;
 
 import com.voronkov.Initializr.Dao.ProductDao;
-import com.voronkov.Initializr.Dao.ProductDaoCl;
 import com.voronkov.Initializr.service.SessionFactoryUtils;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class ProductDaoRep implements ProductDao {
+public class ProductDaoRep implements com.voronkov.Initializr.noneed.ProductDao {
 
     private SessionFactoryUtils sessionFactoryUtils;
 
@@ -20,17 +19,17 @@ public class ProductDaoRep implements ProductDao {
     }
 
     @Override
-    public ProductDaoCl findById(Long id) {
+    public ProductDao findById(Long id) {
         try (Session session = sessionFactoryUtils.getSession();) {
             session.beginTransaction();
-            ProductDaoCl product = session.get(ProductDaoCl.class, id);
+            ProductDao product = session.get(ProductDao.class, id);
             session.getTransaction().commit();
             return product;
         }
     }
 
     @Override
-    public void saveOrUpdate(ProductDaoCl product) {
+    public void saveOrUpdate(ProductDao product) {
         try (Session session = sessionFactoryUtils.getSession();) {
             session.beginTransaction();
             session.saveOrUpdate(product);
@@ -39,10 +38,10 @@ public class ProductDaoRep implements ProductDao {
     }
 
     @Override
-    public List<ProductDaoCl> findAllProducts() {
+    public List<ProductDao> findAllProducts() {
         try (Session session = sessionFactoryUtils.getSession();) {
             session.beginTransaction();
-            List<ProductDaoCl> products = session.createQuery("select p from ProductDaoCl p").getResultList();
+            List<ProductDao> products = session.createQuery("select p from ProductDaoCl p").getResultList();
             session.getTransaction().commit();
             return products;
         }
@@ -60,7 +59,7 @@ public class ProductDaoRep implements ProductDao {
     }
 
     @Override
-    public void save(ProductDaoCl product) {
+    public void save(ProductDao product) {
         try (Session session = sessionFactoryUtils.getSession();) {
             session.beginTransaction();
             session.save(product);
