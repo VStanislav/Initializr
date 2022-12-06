@@ -19,8 +19,6 @@
         <p></p>
         <input class="form-control" type="number" placeholder="max" ng-model="betweenPrice.max_price">
         <p></p>
-        <input class="form-control" type="text" placeholder="diler" ng-model="betweenPrice.diler">
-        <p></p>
         <button type="submit" class="btn-primary">Find</button>
         <button class="btn-primary" ng-click="clear()" >Clear</button>
     </form>
@@ -31,33 +29,50 @@
             <td>ID</td>
             <td>Название</td>
             <td>Цена</td>
-            <td>Diler</td>
-            <td>Action</td>
         </tr>
         <tbody>
-        <tr ng-repeat="p in ProductList">
+        <tr ng-repeat="p in ProductList.content">
             <td>{{p.id}}</td>
             <td>{{p.name}}</td>
             <td>
-                <button class="btn btn-primary" ng-click="changeScore(p.id,-5)">-</button>
+<!--                <button class="btn btn-primary" ng-click="changeScore(p.id,-5)">-</button>-->
                 {{p.price}}
-                <button class="btn btn-primary" ng-click="changeScore(p.id,5)">+</button>
+<!--                <button class="btn btn-primary" ng-click="changeScore(p.id,5)">+</button>-->
             </td>
-            <td>{{p.diler}}</td>
             <td>
-                <button class="btn btn-danger" ng-click="deleteProduct(p.id)">Удалить</button>
+                <button class="btn btn-success" ng-click="addIntoOrder(p.id)">В корзину</button>
             </td>
         </tr>
         </tbody>
     </table>
-    <h3>Добавление продукта</h3>
-    <form novalidate ng-submit="createProduct()">
-        <input class="form-control" type="text" placeholder="Название" ng-model="newProduct.name">
-        <p></p>
-        <input class="form-control" type="number" placeholder="Цена" ng-model="newProduct.price">
-        <p></p>
-        <button type="submit" class="btn-primary">Сохранить продукт</button>
-    </form>
+
+    <h3>Корзина товаров</h3>
+    <table class="table table-hover">
+        <tr>
+            <td>ID</td>
+            <td>Название</td>
+            <td>Цена</td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="o in OrderList">
+            <td>{{o.id}}</td>
+            <td>{{o.name}}</td>
+            <td>{{o.price}}</td>
+            <td>
+                <button class="btn btn-danger" ng-click="deleteFromOrder(o.id)">Удалить из заказа</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+<!--    <h3>Добавление продукта</h3>-->
+<!--    <form novalidate ng-submit="createProduct()">-->
+<!--        <input class="form-control" type="text" placeholder="Название" ng-model="newProduct.name">-->
+<!--        <p></p>-->
+<!--        <input class="form-control" type="number" placeholder="Цена" ng-model="newProduct.price">-->
+<!--        <p></p>-->
+<!--        <button type="submit" class="btn-primary">Сохранить продукт</button>-->
+<!--    </form>-->
 </div>
 </body>
 </html>
