@@ -1,15 +1,13 @@
 package com.voronkov.Initializr.api;
 
-import com.voronkov.Initializr.Dao.ProductDaoCl;
+import com.voronkov.Initializr.Dao.ProductDao;
 import com.voronkov.Initializr.service.ProductService;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-
-import javax.annotation.PostConstruct;
-import java.util.List;
 
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("api/v1/products")
 public class ProductController {
     private ProductService productService;
 
@@ -17,31 +15,42 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping()
-    public List<ProductDaoCl> loadStartList() {
-        return productService.getAllProducts();
+    @GetMapping
+    public Page<com.voronkov.Initializr.dto.ProductDto> findBetweenMinMax(
+            @RequestParam(name = "min_price", defaultValue = "0") Integer minPrice,
+            @RequestParam(name = "max_price", required = false) Integer maxPrice,
+            @RequestParam(name = "p", defaultValue = "1") Integer page,
+            @RequestParam(name = "name", required = false) String name,
+            @RequestParam(name = "diler", required = false) String diler
+
+    ) {
+        if (page < 1) {
+            page = 1;
+        }
+        return productService.find(minPrice, maxPrice, name, diler, page).map(
+                s -> new com.voronkov.Initializr.dto.ProductDto(s)
+        );
     }
 
-    @PostMapping("/new")
-    public void saveNewProduct(@RequestBody ProductDaoCl productDaoCl) {
+    @GetMapping("/{id}")
+    public ProductDao findById(@PathVariable Long id) {
+        return productService.findById(id);
+    }
+
+    @PutMapping
+    public void updateProduct(@RequestBody ProductDao productDaoCl) {
         productService.save(productDaoCl);
     }
 
-    @GetMapping("/delete/{id}")
+    @PostMapping
+    public void saveNewProduct(@RequestBody ProductDao productDao) {
+        productDao.setId(null);
+        productService.save(productDao);
+    }
+
+    @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         productService.deleteById(id);
     }
-
-    @GetMapping("/change")
-    public void changeScore(@RequestParam Long studentId, @RequestParam Integer delta) {
-        productService.changeScore(studentId, delta);
-    }
-
-    @GetMapping("/find")
-    public List<ProductDaoCl> findBetweenMinMax(@RequestParam(required = false) Integer min, @RequestParam(required = false) Integer max) {
-        System.out.println(min+"+++"+max);
-        if (min==null) min=0;
-        if (max==null) max=Integer.MAX_VALUE;
-        return productService.findProductsBetweenPrice(min,max);
-    }
 }
+

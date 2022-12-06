@@ -13,12 +13,16 @@
 <div class="container" ng-controller="indexController">
     <h3>Фильтр цены</h3>
     <form novalidate ng-submit="findPrice()">
-        <input class="form-control" type="text" placeholder="min" ng-model="betweenPrice.minn">
+        <input class="form-control" type="text" placeholder="name" ng-model="betweenPrice.name">
         <p></p>
-        <input class="form-control" type="number" placeholder="max" ng-model="betweenPrice.maxx">
+        <input class="form-control" type="number" placeholder="min" ng-model="betweenPrice.min_price">
+        <p></p>
+        <input class="form-control" type="number" placeholder="max" ng-model="betweenPrice.max_price">
+        <p></p>
+        <input class="form-control" type="text" placeholder="diler" ng-model="betweenPrice.diler">
         <p></p>
         <button type="submit" class="btn-primary">Find</button>
-        <button type="reset" class="btn-primary" ng-click="loadProducts()">Clear</button>
+        <button class="btn-primary" ng-click="clear()" >Clear</button>
     </form>
 
     <h3>Список товаров</h3>
@@ -27,6 +31,7 @@
             <td>ID</td>
             <td>Название</td>
             <td>Цена</td>
+            <td>Diler</td>
             <td>Action</td>
         </tr>
         <tbody>
@@ -38,6 +43,7 @@
                 {{p.price}}
                 <button class="btn btn-primary" ng-click="changeScore(p.id,5)">+</button>
             </td>
+            <td>{{p.diler}}</td>
             <td>
                 <button class="btn btn-danger" ng-click="deleteProduct(p.id)">Удалить</button>
             </td>

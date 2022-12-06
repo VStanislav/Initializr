@@ -15,7 +15,7 @@
         <property name="current_session_context_class">thread</property>
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
-        <mapping class="com.voronkov.Initializr.Dao.ProductDaoCl"/>
+        <mapping class="com.voronkov.Initializr.Dao.ProductDao"/>
 
     </session-factory>
 </hibernate-configuration>

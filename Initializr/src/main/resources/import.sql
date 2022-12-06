@@ -1,4 +1,3 @@
 DROP TABLE products IF EXISTS ;
-CREATE TABLE IF NOT EXISTS products (id bigserial, name VARCHAR(255), price integer , PRIMARY KEY (id));
-INSERT INTO products (name,price) VALUES ('Apple',99),('Sony',100),('JBL',101);
-
+CREATE TABLE IF NOT EXISTS products (id bigserial, name VARCHAR(255), price integer , diler VARCHAR(255), PRIMARY KEY (id));
+INSERT INTO products (name,price,diler) VALUES ('Apple',99,'Marvel'),('Sony',100,'Marvel'),('Sony',30,'Marvel'),('Pony',40,'Marvel'),('Vny',70,'Marvel'),('fgy',10,'Marvel'),('on',90,'Marvel'),('Sy',110,'Marvel'),('Sddds',140,'Marvel'),('vn',120,'Marvel'),('hrt',430,'Marvel'),('vbcv',540,'Marvel'),('Sony',650,'Marvel'),('Sdsdy',140,'Marvel'),('xcv',760,'Ozon'),('Sony',180,'Marvel'),('Sony',530,'Marvel'),('Sony',430,'Marvel'),(' xcv',980,'Marvel'),('Sony',550,'DNS'),('JBL',101,'Marvel');
