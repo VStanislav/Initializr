@@ -22,22 +22,23 @@ angular.module('app',[]).controller('indexController',function ($scope,$http){
     };
 
     $scope.showOrder = function (){
-        $http.get(contextPath+'/products/show')
+        $http.get(contextPath+'/products/order/show')
             .then(function (response){
             $scope.OrderList = response.data;
         });
     }
 
     $scope.addIntoOrder = function (productId){
-    $http.get(contextPath+'/products/add/'+productId)
+    $http.get(contextPath+'/products/order/add/'+productId)
         .then(function (response){
             $scope.showOrder();
         });
     }
 
     $scope.deleteFromOrder = function (productId){
-    $http.delete(contextPath+'/products/remove/'+productId)
+    $http.get(contextPath+'/products/order/remove/'+productId)
         .then(function (response){
+            alert("Noooo");
             $scope.showOrder();
         });
     }

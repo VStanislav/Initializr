@@ -45,35 +45,37 @@ public class ProductController {
         return productConverter.daoToDto(productDao);
     }
 
-    @GetMapping("/add/{id}")
+    @GetMapping("/order/add/{id}")
     public void addProductIntoOrder(@PathVariable(name = "id") Long id) {
         order.addIntoOrder(id);
     }
-    @GetMapping("/show")
+
+    @GetMapping("/order/show")
     public List<ProductDto> showProductIntoOrder() {
         return order.getOrderList();
     }
 
-    @DeleteMapping("/remove/{id}")
+    @GetMapping("/order/remove/{id}")
     public void deleteById(@PathVariable Long id) {
+        System.out.println("in controller");
         order.deleteFrom(id);
     }
 
 
-    @PutMapping
-    public ProductDto updateProduct(@RequestBody ProductDto productDtoCl) {
-       validator.validate(productDtoCl);
-        ProductDao p = productService.update(productDtoCl);
-        return productConverter.daoToDto(p);
-    }
-
-    @PostMapping
-    public ProductDto saveNewProduct(@RequestBody ProductDto productDto) {
-        validator.validate(productDto);
-        ProductDao p = productConverter.dtoToDao(productDto);
-        p = productService.save(p);
-         return productConverter.daoToDto(p);
-    }
+//    @PutMapping("/base")
+//    public ProductDto updateProduct(@RequestBody ProductDto productDtoCl) {
+//       validator.validate(productDtoCl);
+//        ProductDao p = productService.update(productDtoCl);
+//        return productConverter.daoToDto(p);
+//    }
+//
+//    @PostMapping("/base")
+//    public ProductDto saveNewProduct(@RequestBody ProductDto productDto) {
+//        validator.validate(productDto);
+//        ProductDao p = productConverter.dtoToDao(productDto);
+//        p = productService.save(p);
+//         return productConverter.daoToDto(p);
+//    }
 }
 
 
