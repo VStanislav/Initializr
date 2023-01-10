@@ -24,9 +24,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         log.info("Dao Authentication Provider");
         http.authorizeRequests()
                 .antMatchers("/api/v1/products/order/**").authenticated()
-                .antMatchers("/api/v1/products/base/**").hasAnyAuthority("WORK_WITH_PRODUCTS")
+                .antMatchers("/admin").hasAnyAuthority("SUPERADMIN")
+                .antMatchers("/api/v1/products/base/**").hasAnyAuthority("WORKWITHPRODUCTS")
                 //право работать с базой продуктов
-                .antMatchers("/api/v1/products/users/**").hasAnyAuthority("WORK_WITH_USERS")
+                .antMatchers("/api/v1/users/**").hasAnyAuthority("WORKWITHUSERS")
                 //WORK_WITH_USERS не реализовал, но это право по типу роли суперадмина, для редактирования базы пользователей.
                 .anyRequest().permitAll()
                 .and()

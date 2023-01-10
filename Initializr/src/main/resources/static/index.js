@@ -46,29 +46,3 @@ angular.module('app',[]).controller('indexController',function ($scope,$http){
     $scope.findPrice();
     $scope.showOrder();
 });
-
-
-//Напоминалки:
-
-// $scope.changeScore = function (studentId,delta){
-//     $http({
-//         url: contextPath + '/products/change',
-//         method: 'GET',
-//         params: {
-//             studentId: studentId,
-//             delta: delta
-//         }
-//     }).then(function (response){
-//         $scope.findPrice();
-//     });
-// }
-
-// $scope.createProduct = function (){
-//     $http.post( contextPath + '/products/new',$scope.newProduct)
-//         .then(function (response){
-//             $scope.newProduct=null;
-//             $scope.findPrice();
-//         });
-// }
-
-//

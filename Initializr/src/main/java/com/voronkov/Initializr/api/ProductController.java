@@ -61,21 +61,27 @@ public class ProductController {
         order.deleteFrom(id);
     }
 
+    @DeleteMapping("/base/{id}")
+    public void findBaseById(@PathVariable Long id) {
+        ProductDao productDao = productService.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Продукт не найден с таким ID " + id));
+        productService.deleteById(productDao.getId());
+    }
 
-//    @PutMapping("/base")
-//    public ProductDto updateProduct(@RequestBody ProductDto productDtoCl) {
-//       validator.validate(productDtoCl);
-//        ProductDao p = productService.update(productDtoCl);
-//        return productConverter.daoToDto(p);
-//    }
-//
-//    @PostMapping("/base")
-//    public ProductDto saveNewProduct(@RequestBody ProductDto productDto) {
-//        validator.validate(productDto);
-//        ProductDao p = productConverter.dtoToDao(productDto);
-//        p = productService.save(p);
-//         return productConverter.daoToDto(p);
-//    }
+    @PutMapping("/base")
+    public ProductDto updateProduct(@RequestBody ProductDto productDtoCl) {
+       validator.validate(productDtoCl);
+        ProductDao p = productService.update(productDtoCl);
+        return productConverter.daoToDto(p);
+    }
+
+    @PostMapping("/base")
+    public ProductDto saveNewProduct(@RequestBody ProductDto productDto) {
+        validator.validate(productDto);
+        ProductDao p = productConverter.dtoToDao(productDto);
+        p = productService.save(p);
+         return productConverter.daoToDto(p);
+    }
 }
 
 
