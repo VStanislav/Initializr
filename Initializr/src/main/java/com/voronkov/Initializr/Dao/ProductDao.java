@@ -22,7 +22,7 @@ public class ProductDao {
 
     @Column(name = "price")
     private Integer price;
-
+//
 //    @Column(name = "diler")
 //    private String diler;
 

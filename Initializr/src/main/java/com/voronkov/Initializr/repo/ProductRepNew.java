@@ -10,3 +10,4 @@ import org.springframework.stereotype.Repository;
 public interface ProductRepNew extends JpaRepository<ProductDao,Long>, JpaSpecificationExecutor<ProductDao> {
 
 }
+

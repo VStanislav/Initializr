@@ -45,29 +45,37 @@ public class ProductController {
         return productConverter.daoToDto(productDao);
     }
 
-    @GetMapping("/add/{id}")
+    @GetMapping("/order/add/{id}")
     public void addProductIntoOrder(@PathVariable(name = "id") Long id) {
         order.addIntoOrder(id);
     }
-    @GetMapping("/show")
+
+    @GetMapping("/order/show")
     public List<ProductDto> showProductIntoOrder() {
         return order.getOrderList();
     }
 
-    @DeleteMapping("/remove/{id}")
+    @GetMapping("/order/remove/{id}")
     public void deleteById(@PathVariable Long id) {
+        System.out.println("in controller");
         order.deleteFrom(id);
     }
 
+    @DeleteMapping("/base/{id}")
+    public void findBaseById(@PathVariable Long id) {
+        ProductDao productDao = productService.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException("Продукт не найден с таким ID " + id));
+        productService.deleteById(productDao.getId());
+    }
 
-    @PutMapping
+    @PutMapping("/base")
     public ProductDto updateProduct(@RequestBody ProductDto productDtoCl) {
        validator.validate(productDtoCl);
         ProductDao p = productService.update(productDtoCl);
         return productConverter.daoToDto(p);
     }
 
-    @PostMapping
+    @PostMapping("/base")
     public ProductDto saveNewProduct(@RequestBody ProductDto productDto) {
         validator.validate(productDto);
         ProductDao p = productConverter.dtoToDao(productDto);
