@@ -26,6 +26,7 @@ public class Order {
 
 
     public void deleteFrom(Long id) {
+        System.out.println("in");
         ProductDao productDao = productService.findById(id).orElseThrow();
         orderList.remove(productConverter.daoToDto(productDao));
     }
