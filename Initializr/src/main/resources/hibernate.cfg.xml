@@ -16,6 +16,9 @@
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
         <mapping class="com.voronkov.Initializr.Dao.ProductDao"/>
+        <mapping class="com.voronkov.Initializr.entity.User"/>
+        <mapping class="com.voronkov.Initializr.entity.Role"/>
+        <mapping class="com.voronkov.Initializr.entity.Authority"/>
 
     </session-factory>
 </hibernate-configuration>
